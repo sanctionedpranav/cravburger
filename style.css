@@ -25,8 +25,8 @@
 
 /* ---------- RESET ---------- */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; overflow-x: hidden; }
-body { font-family: var(--body); background: var(--beige); color: var(--black); cursor: none; }
+html { scroll-behavior: smooth; overflow-x: clip; }
+body { font-family: var(--body); background: var(--beige); color: var(--black); overflow-x: clip; cursor: none; }
 img  { display: block; max-width: 100%; height: auto; }
 a    { text-decoration: none; color: inherit; }
 button { border: none; background: none; cursor: none; font-family: inherit; }
@@ -423,28 +423,29 @@ button { border: none; background: none; cursor: none; font-family: inherit; }
 .sticker {
   position: absolute; z-index: 50;
   filter: drop-shadow(0 8px 20px rgba(0,0,0,.18));
+  pointer-events: none;
 }
 .sticker img { width: 100%; height: auto; display: block; }
 
 /* burgerselfie (burger boy) – top-left corner of gallery */
 .sticker-burgerselfie {
-  width: clamp(220px, 25vw, 400px);
-  top: clamp(-140px, -18vw, -60px);
-  left: clamp(-40px, -2vw, 20px);
+  width: clamp(13.75rem, 25vw, 25rem);
+  top: clamp(-8.75rem, -18vw, -3.75rem);
+  left: clamp(-2.5rem, -2vw, 1.25rem);
   animation: stickerFloat 5s ease-in-out infinite;
 }
 /* fries sticker – left of red section */
 .sticker-fries {
-  width: clamp(280px, 36vw, 650px);
-  top: clamp(-100px, -12vw, -20px);
-  left: clamp(-180px, -10vw, -40px);
+  width: clamp(17.5rem, 36vw, 40.6rem);
+  top: clamp(-6.25rem, -12vw, -1.25rem);
+  left: clamp(-11.25rem, -10vw, -2.5rem);
   animation: stickerFloat 6s ease-in-out infinite 0.5s;
 }
 /* burger boy right – right side of red section */
 .sticker-burgerboy-right {
-  width: clamp(320px, 42vw, 750px);
-  top: clamp(80px, 12vw, 250px);
-  right: clamp(-200px, -12vw, -50px);
+  width: clamp(20rem, 42vw, 46.8rem);
+  top: clamp(5rem, 12vw, 15.6rem);
+  right: clamp(-12.5rem, -12vw, -3.1rem);
   animation: stickerFloat 7s ease-in-out infinite 1s;
 }
 
@@ -480,6 +481,7 @@ button { border: none; background: none; cursor: none; font-family: inherit; }
 .red-zone {
   position: relative; background: var(--red);
   margin-top: clamp(-60px,-15vw,-20px);
+  overflow: hidden;
 }
 .wave-divider {
   position: absolute; top: 0; left: 0; right: 0; pointer-events: none; z-index: 5;
@@ -1064,11 +1066,11 @@ button { border: none; background: none; cursor: none; font-family: inherit; }
 
 .mf-logo-title {
   font-family: var(--modak);
-  font-size: clamp(150px, 22vw, 380px);
+  font-size: clamp(60px, 22vw, 380px);
   color: var(--red);
   line-height: 0.72;
   text-transform: uppercase;
-  -webkit-text-stroke: clamp(6px, 0.8vw, 16px) var(--white);
+  -webkit-text-stroke: clamp(1.5px, 0.8vw, 16px) var(--white);
   paint-order: stroke fill;
   text-shadow: 0 12px 36px rgba(76, 0, 22, 0.08);
   margin: 0;
@@ -1093,15 +1095,15 @@ button { border: none; background: none; cursor: none; font-family: inherit; }
 }
 
 /* Horizontal positions and widths for the 9 juggling vegetables */
-.mfi-lettuce-1 { width: clamp(70px, 7vw, 120px); left: 8%; }
-.mfi-tomato-1  { width: clamp(90px, 10vw, 170px); left: 20%; }
-.mfi-cheese-1  { width: clamp(80px, 9vw, 150px); left: 32%; }
-.mfi-patty-1   { width: clamp(100px, 11vw, 190px); left: 45%; }
-.mfi-lettuce-2 { width: clamp(70px, 7vw, 120px); left: 58%; }
-.mfi-tomato-2  { width: clamp(90px, 10vw, 170px); left: 70%; }
-.mfi-cheese-2  { width: clamp(80px, 9vw, 150px); left: 82%; }
-.mfi-patty-2   { width: clamp(100px, 11vw, 190px); left: 92%; }
-.mfi-leaf-1    { width: clamp(20px, 2.5vw, 42px); left: 26%; }
+.mfi-lettuce-1 { width: clamp(2.5rem, 7vw, 7.5rem); left: 8%; }
+.mfi-tomato-1  { width: clamp(3rem, 10vw, 10.5rem); left: 18%; }
+.mfi-cheese-1  { width: clamp(2.8rem, 9vw, 9.5rem); left: 28%; }
+.mfi-patty-1   { width: clamp(3.5rem, 11vw, 12rem); left: 39%; }
+.mfi-lettuce-2 { width: clamp(2.5rem, 7vw, 7.5rem); left: 50%; }
+.mfi-tomato-2  { width: clamp(3rem, 10vw, 10.5rem); left: 61%; }
+.mfi-cheese-2  { width: clamp(2.8rem, 9vw, 9.5rem); left: 72%; }
+.mfi-patty-2   { width: clamp(3.5rem, 11vw, 12rem); left: 83%; }
+.mfi-leaf-1    { width: clamp(0.8rem, 2.5vw, 2.6rem); left: 23%; }
 
 /* Staggered dynamic juggle loops (duration 6s, infinite loop) */
 .mega-footer.in .mfi-lettuce-1 {
@@ -1378,16 +1380,23 @@ button { border: none; background: none; cursor: none; font-family: inherit; }
    RESPONSIVE
    ========================================== */
 @media (max-width: 900px) {
-  .hero-main-title { font-size: clamp(80px,24vw,200px); }
-  .left-accent  { top: 2%; left: 2%; transform: none; }
-  .right-accent { bottom: 2%; right: 2%; transform: none; }
-  .hero-desc-row { flex-direction: column; align-items: center; gap: 12px; }
-  .hero-desc-left, .hero-desc-right { width: 90%; text-align: center; }
   .about-grid { max-width: 95vw; }
   .about-gallery-wrap { padding: 0 clamp(8px,4vw,24px) clamp(24px,5vw,60px); }
   .about-big-heading { max-width: 95%; }
   .menu-grid { grid-template-columns: 1fr 1fr; }
   
+  /* Scale down menu stickers on tablet to prevent cards overlap */
+  .sticker-fries {
+    width: clamp(9.3rem, 20vw, 15.6rem);
+    top: clamp(-3.75rem, -8vw, -1.25rem);
+    left: clamp(-6.25rem, -6vw, -1.8rem);
+  }
+  .sticker-burgerboy-right {
+    width: clamp(11.25rem, 25vw, 18.75rem);
+    top: clamp(3.1rem, 8vw, 9.3rem);
+    right: clamp(-7.5rem, -8vw, -1.8rem);
+  }
+
   .feel-change {
     grid-template-columns: 1fr;
   }
@@ -1406,6 +1415,54 @@ button { border: none; background: none; cursor: none; font-family: inherit; }
   .menu-grid { grid-template-columns: 1fr; }
   .about-grid { gap: 6px; }
   .sticker-burgerselfie { display: none; }
-  .hero-crav { transform: translateY(-4vw); }
+
+  /* Scale down menu stickers further on mobile */
+  .sticker-fries {
+    width: clamp(6.25rem, 18vw, 10rem);
+    top: -1.8rem;
+    left: -1.8rem;
+  }
+  .sticker-burgerboy-right {
+    width: clamp(7.5rem, 22vw, 11.25rem);
+    top: 5rem;
+    right: -1.8rem;
+  }
+
+  /* Center footer navigation elements on mobile wrap */
+  .mf-nav-row {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+  }
+  .mf-nav {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+}
+@media (max-width: 480px) {
+  /* Optimize sticky nav elements for small phone screens */
+  .navbar {
+    padding: 10px 14px;
+  }
+  .nav-logo {
+    font-size: 26px;
+    -webkit-text-stroke: 1.5px white;
+    text-stroke: 1.5px white;
+  }
+  .nav-burgers-btn {
+    padding: 5px 12px;
+    font-size: 10px;
+  }
+  .nav-toggle {
+    padding: 5px 10px;
+    font-size: 10px;
+    gap: 4px;
+  }
+  .burger-lines {
+    width: 14px;
+    height: 10px;
+  }
 }
 
